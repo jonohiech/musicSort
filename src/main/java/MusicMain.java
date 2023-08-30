@@ -18,7 +18,7 @@ public class MusicMain {
             String cleanedInput = input.trim();
             File dir = new File(cleanedInput);
 
-            List<File> allM4as = getAllMp3FilesInFolder(dir);
+            List<File> allM4as = getAllM4aFilesInFolder(dir);
 
             M4atagReader tagReader = new M4atagReader();
 
@@ -65,7 +65,7 @@ public class MusicMain {
 
     }
 
-    private static List<File> getAllMp3FilesInFolder(File file){
+    private static List<File> getAllM4aFilesInFolder(File file){
         List<File> ret = new ArrayList<>();
         if(file.getName().matches(".*\\.m4a")){
             ret.add(file);
@@ -73,8 +73,8 @@ public class MusicMain {
 
             File[] directoryListing = file.listFiles();
             if(ArrayUtils.isNotEmpty(directoryListing)){
-                ret.addAll(Arrays.stream(directoryListing)
-                        .map(MusicMain::getAllMp3FilesInFolder)
+                ret.addAll(Arrays.asList(directoryListing).parallelStream()
+                        .map(MusicMain::getAllM4aFilesInFolder)
                         .flatMap(List::stream).toList());
 
             }
