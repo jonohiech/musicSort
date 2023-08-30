@@ -1,2 +1,2 @@
 # musicSort
-Sorts music based on metadata.
+Groups music in m4a format based on album.
